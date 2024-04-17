@@ -37,6 +37,8 @@ METEOR_DIR=`mktemp -d "$BUILDPACK_DIR"/meteor-XXXX`
 COMPILE_DIR_SUFFIX=".meteor/heroku_build"
 COMPILE_DIR="$APP_CHECKOUT_DIR"/"$COMPILE_DIR_SUFFIX"
 
+ARCHITECTURE="os.linux.x86_64"
+
 # Create directories as needed.
 mkdir -p "$APP_CHECKOUT_DIR" "$METEOR_DIR" "$COMPILE_DIR"
 
@@ -79,7 +81,7 @@ fi
 # </hack>
 
 echo "-----> Building Meteor with ROOT_URL: $ROOT_URL"
-HOME=$METEOR_DIR $METEOR build --server $ROOT_URL --directory $BUNDLE_DEST
+HOME=$METEOR_DIR $METEOR build --server $ROOT_URL --directory $BUNDLE_DEST --architecture $ARCHITECTURE
 mv $BUNDLE_DEST/bundle "$COMPILE_DIR/app"
 rmdir $BUNDLE_DEST
 
